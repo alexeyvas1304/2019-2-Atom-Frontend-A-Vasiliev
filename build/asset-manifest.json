@@ -1,0 +1,16 @@
+{
+  "files": {
+    "main.css": "/2019-2-Atom-Frontend-A-Vasiliev/static/css/main.b4eae362.chunk.css",
+    "main.js": "/2019-2-Atom-Frontend-A-Vasiliev/static/js/main.0e6fdcd1.chunk.js",
+    "main.js.map": "/2019-2-Atom-Frontend-A-Vasiliev/static/js/main.0e6fdcd1.chunk.js.map",
+    "runtime-main.js": "/2019-2-Atom-Frontend-A-Vasiliev/static/js/runtime-main.1c821476.js",
+    "runtime-main.js.map": "/2019-2-Atom-Frontend-A-Vasiliev/static/js/runtime-main.1c821476.js.map",
+    "static/js/2.1556f18d.chunk.js": "/2019-2-Atom-Frontend-A-Vasiliev/static/js/2.1556f18d.chunk.js",
+    "static/js/2.1556f18d.chunk.js.map": "/2019-2-Atom-Frontend-A-Vasiliev/static/js/2.1556f18d.chunk.js.map",
+    "index.html": "/2019-2-Atom-Frontend-A-Vasiliev/index.html",
+    "precache-manifest.b7f8ca4dc1aac2199c05cbdd69f38eb2.js": "/2019-2-Atom-Frontend-A-Vasiliev/precache-manifest.b7f8ca4dc1aac2199c05cbdd69f38eb2.js",
+    "service-worker.js": "/2019-2-Atom-Frontend-A-Vasiliev/service-worker.js",
+    "static/css/main.b4eae362.chunk.css.map": "/2019-2-Atom-Frontend-A-Vasiliev/static/css/main.b4eae362.chunk.css.map",
+    "static/media/logo.svg": "/2019-2-Atom-Frontend-A-Vasiliev/static/media/logo.a55f1c43.svg"
+  }
+}
