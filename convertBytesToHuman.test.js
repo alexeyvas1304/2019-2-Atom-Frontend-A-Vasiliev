@@ -12,6 +12,7 @@ import convertBytesToHuman from './convertBytesToHuman';
 test('Возвращает false для неправильного типа данных', () => {
   expect(convertBytesToHuman("string")).toBe(false)
   expect(convertBytesToHuman("123")).toBe(false)
+  expect(convertBytesToHuman("123")).toBe(false)
   expect(convertBytesToHuman(true)).toBe(false)
   expect(convertBytesToHuman(null)).toBe(false)
   expect(convertBytesToHuman(undefined)).toBe(false)
