@@ -12,6 +12,17 @@
  * и класса (например, отрицательные числа)
  */
 
-export default function convertBytesToHuman(bytes) {
-  // your solution goes here
+
+export default function convertBytesToHuman (bytes) {
+  let sizes = ['B','KB','MB','GB','TB','PB','EB'];
+  if (Number.isInteger(bytes) && bytes >=0) {
+    let cnt = 0;
+    while (bytes>1024) {
+      bytes/=1024;
+      cnt +=1;
+    }
+    return (bytes.toFixed(2)+` ${sizes[cnt]}`)
+  }
+  return false;
 }
+
