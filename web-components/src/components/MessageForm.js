@@ -19,6 +19,13 @@ template.innerHTML = `
         .partner {
         color: white;
         text-align: center;
+        margin-bottom: 10px;
+        }
+        
+        .state {
+        font-size: 14pt;
+        text-align: center;
+        color: white;
         }
         
         .window {
@@ -27,21 +34,16 @@ template.innerHTML = `
         display:flex;
         flex-direction: column;
         align-items: flex-end;
-        height:75vh;
+        height:82vh;
         overflow: scroll;
         }
         
         
-        
-        
         end {
-        height:15vh;
+        height:8vh;
             flex:1;
             background-color: purple;
         }
-        
-        
-        
         
 
         input[type=submit] {
@@ -53,7 +55,8 @@ template.innerHTML = `
     <form>
     
         <div class = "begin">
-            <h2 class = "partner">АЛЕКСЕЙ ВАСИЛЬЕВ</h2>
+            <h1 class = "partner">АЛЕКСЕЙ ВАСИЛЬЕВ</h1 class = "partner">
+            <div class = "state">в сети</div>
         </div>
         <div class = "window"></div>    
         <div class = "end">
@@ -83,7 +86,6 @@ class MessageForm extends HTMLElement {
     this.messages = messages ? JSON.parse(messages) : [];
     for (let i = 0; i < this.messages.length; i++) {
       const $message = document.createElement('message-block');
-      $message.setAttribute('author', this.messages[i][0]);
       $message.setAttribute('content', this.messages[i][1]);
       $message.setAttribute('time', this.messages[i][2]);
       this.$window.appendChild($message);
@@ -93,7 +95,7 @@ class MessageForm extends HTMLElement {
   _onSubmit(event) {
     event.preventDefault();
 
-    if (this.$input.value !== '') {
+    if (this.$input.value.trim() !== '') {
       let content = this.$input.value;
       let Data = new Date();
       let Hour = Data.getHours();
@@ -109,7 +111,6 @@ class MessageForm extends HTMLElement {
         Seconds = '0' + Seconds;
       }
       const time = Hour + ":" + Minutes + ":" + Seconds;
-      // console.log(time);
       let author = "Алексей";
 
 
@@ -117,13 +118,12 @@ class MessageForm extends HTMLElement {
       localStorage.setItem('history', JSON.stringify(this.messages));
 
       const $message = document.createElement('message-block');
-      $message.setAttribute('author', author);
       $message.setAttribute('content', content);
       $message.setAttribute('time', time);
       this.$window.appendChild($message);
 
 
-      this.$window.scrollTo(0, "Infinity");
+      this.$window.scrollTo(0, 10 ** 20); // не знаю, как по-другому сделать нормальный скролл
       this.$input.value = '';
     }
   }

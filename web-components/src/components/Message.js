@@ -5,17 +5,15 @@ const template = document.createElement('template');
 
 template.innerHTML = `
     <style xmlns="http://www.w3.org/1999/html">
-        .author {
-            font-size: 15px;
-            flex:1;
-            
-        }
+        
         
         .content {
             display: inline-block;
             font-size: 15px;
-            font-style: italic;
+            font-family:Ubuntu;
             flex:5;
+            text-align: left;
+            word-wrap: break-word;
         }
         
         .time {
@@ -23,6 +21,8 @@ template.innerHTML = `
             padding: 1px;
             margin-bottom: 1px;
             flex:1;
+            text-align: right;
+            overflow-wrap: normal;
         }
         
         .all {
@@ -32,14 +32,12 @@ template.innerHTML = `
             max-width: 30vw;
             padding: 10px;
             margin-top: 15px;
-            display: flex;
+            margin-right: 5px;
+            display:flex;
             flex-direction: column;
-            /*align-items: flex-start;*/
-            
         }
     </style>
     <div class="all">
-        <div class = "author"></div>
         <div class = "content"></div>
         <div class = "time"></div>
     </div>

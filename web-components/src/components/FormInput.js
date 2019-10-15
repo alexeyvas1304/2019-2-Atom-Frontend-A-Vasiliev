@@ -4,17 +4,14 @@ const template = document.createElement('template');
 template.innerHTML = `
     <style>
         input {
-            font-size: 40px;
+            font-size: 45px;
             width: calc(100% - 4px);
             height:100%;
             width: 100%;
             border-top: 3px solid purple;
-            padding:0;
+            padding:4px;
             
         }
-
-        /*:host {*/
-        /*   display: inline-block;*/
         
         
     </style>
