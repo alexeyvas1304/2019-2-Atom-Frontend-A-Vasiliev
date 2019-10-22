@@ -1,6 +1,3 @@
-/* eslint-disable default-case */
-/* eslint-disable no-underscore-dangle */
-/* eslint-disable indent */
 const template = document.createElement('template');
 
 template.innerHTML = `
@@ -44,61 +41,61 @@ template.innerHTML = `
 `;
 
 class Message extends HTMLElement {
-  constructor() {
-    super();
-    this._shadowRoot = this.attachShadow({ mode: 'open' });
-    this._shadowRoot.appendChild(template.content.cloneNode(true));
+    constructor() {
+        super();
+        this.shadowRoot = this.attachShadow({ mode: 'open' });
+        this.shadowRoot.appendChild(template.content.cloneNode(true));
 
-    this.$all = this._shadowRoot.querySelector('.all');
+        this.$all = this.shadowRoot.querySelector('.all');
 
-    this.$author = this._shadowRoot.querySelector('.author');
-    this.$content = this._shadowRoot.querySelector('.content');
-    this.$time = this._shadowRoot.querySelector('.time');
-  }
-
-  static get observedAttributes() {
-    return ['author', 'content', 'time'];
-  }
-
-  attributeChangedCallback(name, oldValue, newValue) {
-    switch (name) {
-      case 'content':
-        this.$content.innerHTML = newValue;
-        break;
-
-      case 'time':
-        this.$time.innerHTML = newValue;
-        break;
-
-      case 'author':
-        this.$author.innerHTML = newValue;
-        break;
+        this.$author = this.shadowRoot.querySelector('.author');
+        this.$content = this.shadowRoot.querySelector('.content');
+        this.$time = this.shadowRoot.querySelector('.time');
     }
-  }
 
-  get content() {
-    return this.$content.value;
-  }
+    static get observedAttributes() {
+        return ['author', 'content', 'time'];
+    }
 
-  set content(newValue) {
-    this.$content.innerHTML = newValue;
-  }
+    attributeChangedCallback(name, oldValue, newValue) {
+        switch (name) {
+        case 'content':
+            this.$content.innerHTML = newValue;
+            break;
 
-  get time() {
-    return this.$time.value;
-  }
+        case 'time':
+            this.$time.innerHTML = newValue;
+            break;
 
-  set time(newValue) {
-    this.$time.innerHTML = newValue;
-  }
+        case 'author':
+            this.$author.innerHTML = newValue;
+            break;
+        }
+    }
 
-  get author() {
-    return this.$author.value;
-  }
+    get content() {
+        return this.$content.value;
+    }
 
-  set author(newValue) {
-    this.$author.innerHTML = newValue;
-  }
+    set content(newValue) {
+        this.$content.innerHTML = newValue;
+    }
+
+    get time() {
+        return this.$time.value;
+    }
+
+    set time(newValue) {
+        this.$time.innerHTML = newValue;
+    }
+
+    get author() {
+        return this.$author.value;
+    }
+
+    set author(newValue) {
+        this.$author.innerHTML = newValue;
+    }
 }
 
 customElements.define('message-block', Message);

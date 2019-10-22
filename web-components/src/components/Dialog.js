@@ -1,5 +1,3 @@
-/* eslint-disable no-underscore-dangle */
-/* eslint-disable default-case */
 const template = document.createElement('template');
 
 template.innerHTML = `
@@ -97,14 +95,14 @@ template.innerHTML = `
 class Dialog extends HTMLElement {
     constructor() {
         super();
-        this._shadowRoot = this.attachShadow({ mode: 'open' });
-        this._shadowRoot.appendChild(template.content.cloneNode(true));
+        this.shadowRoot = this.attachShadow({ mode: 'open' });
+        this.shadowRoot.appendChild(template.content.cloneNode(true));
 
-        this.$all = this._shadowRoot.querySelector('.all');
+        this.$all = this.shadowRoot.querySelector('.all');
 
-        this.$time = this._shadowRoot.querySelector('.time');
-        this.$content = this._shadowRoot.querySelector('.content');
-        this.$header = this._shadowRoot.querySelector('.header');
+        this.$time = this.shadowRoot.querySelector('.time');
+        this.$content = this.shadowRoot.querySelector('.content');
+        this.$header = this.shadowRoot.querySelector('.header');
     }
 
     static get observedAttributes() {
