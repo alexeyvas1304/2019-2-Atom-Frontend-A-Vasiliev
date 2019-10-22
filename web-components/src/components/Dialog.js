@@ -5,10 +5,11 @@ template.innerHTML = `
 
 
     .all {
-        background-color: yellow;
+        background-color: white;
+        border-bottom: 3px purple solid;
         width: 100vw ;
         padding: 10px;
-        margin-top: 15px;
+        /*margin-top: 15px;*/
         margin-right: 5px;
         display:flex;
         height:10vh ;
@@ -70,9 +71,9 @@ template.innerHTML = `
 
     .sign {
         overflow: hidden;
-        flex:1;
-        width:25px;
-        height:25px;
+        flex:2;
+        width:35px;
+        height:35px;
         margin-right:15px;
     }
 

@@ -48,7 +48,7 @@ template.innerHTML = `
         }
         
         .newchat {
-        width: 50px;
+        width: 60px;
         float: right;
         margin-right: 15px;
         }
@@ -127,8 +127,8 @@ class DialogForm extends HTMLElement {
             this.$window.setAttribute('time', time);
         }
 
-        this.$messages.setAttribute('style', 'display: None');
         this.$dialogs.setAttribute('style', 'display:');
+        this.$messages.setAttribute('style', 'display: None');
     }
 }
 

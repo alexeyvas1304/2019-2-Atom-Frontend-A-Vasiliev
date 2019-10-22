@@ -10,10 +10,9 @@ template.innerHTML = `
         display: flex;
         }
         
-        button {
-        color:grey;
+        .buttonback {
+        width: 100px;
         margin:20px;
-        flex:1;
         }
         
         .info {
@@ -67,7 +66,7 @@ template.innerHTML = `
     <form>
     
         <div class = "begin">
-            <button>Назад</button>
+            <img class = 'buttonback' src = "https://image.flaticon.com/icons/png/512/12/12104.png">
             <div class="info">
               <h1 class = "partner">АЛЕКСЕЙ ВАСИЛЬЕВ</h1 class = "partner">
               <div class = "state">в сети</div>
@@ -92,7 +91,7 @@ class MessageForm extends HTMLElement {
         this.$form = this.shadowRoot.querySelector('form');
         this.$input = this.shadowRoot.querySelector('form-input');
         this.$window = this.shadowRoot.querySelector('.window');
-        this.$button = this.shadowRoot.querySelector('button');
+        this.$button = this.shadowRoot.querySelector('.buttonback');
         this.$firstMessage = this.shadowRoot.querySelector('message-block');
 
         this.$form.addEventListener('submit', this.onSubmit.bind(this));
