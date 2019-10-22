@@ -27,6 +27,7 @@ template.innerHTML = `
         .search {
         flex:1.2;
         overflow: hidden;
+        margin:5px;
         }
         
        
@@ -65,9 +66,9 @@ template.innerHTML = `
     <form>
         <div class = "dialogs">
             <div class = "begin">
-                <img class = "burger" src="https://css-tricks.com/wp-content/uploads/2012/10/threelines.png">
+                <img class = "burger" src="https://upload.wikimedia.org/wikipedia/commons/thumb/b/b2/Hamburger_icon.svg/1200px-Hamburger_icon.svg.png">
                 <h1 class = "header">СПИСОК ЧАТОВ</h1 class = "header">
-                <img class = "search" src="https://png.pngtree.com/element_origin_min_pic/00/00/07/165789f61e99eea.jpg" >
+                <img class = "search" src="https://elize.ru/img/icons/zoom.png" >
             </div>
             <div class = "window">
                 <dialog-block></dialog-block>

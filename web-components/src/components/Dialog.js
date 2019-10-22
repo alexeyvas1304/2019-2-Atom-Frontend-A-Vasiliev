@@ -9,7 +9,6 @@ template.innerHTML = `
         border-bottom: 3px purple solid;
         width: 100vw ;
         padding: 10px;
-        /*margin-top: 15px;*/
         margin-right: 5px;
         display:flex;
         height:10vh ;
@@ -44,6 +43,8 @@ template.innerHTML = `
         flex:7;
         margin-top: 5px;
         margin-left: 15px;
+        color: purple;
+        font-size: 24px;
     }
 
 
