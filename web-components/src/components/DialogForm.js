@@ -122,7 +122,6 @@ class DialogForm extends HTMLElement {
        let header = JSON.parse(localStorage.getItem("history"))[JSON.parse(localStorage.getItem("history")).length - 1][0];
       let content = JSON.parse(localStorage.getItem("history"))[JSON.parse(localStorage.getItem("history")).length - 1][1];
       let time = JSON.parse(localStorage.getItem("history"))[JSON.parse(localStorage.getItem("history")).length - 1][2];
-      console.log('oppa', header);
        this.$window.setAttribute("header", header);
       this.$window.setAttribute("content", content);
       this.$window.setAttribute("time", time);

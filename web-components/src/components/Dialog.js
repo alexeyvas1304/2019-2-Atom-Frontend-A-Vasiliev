@@ -84,8 +84,8 @@ template.innerHTML = `
         <img class = "avatar" src="https://cdn-st2.rtr-vesti.ru/vh/pictures/bp/115/646/5.jpg";
     </div>
     <div class = "second">
-        <div class = "header">Собеседник</div>
-        <div class = "content">Привет. Добро пожаловать в чат</div>
+        <div class = "header">Служба поддержки</div>
+        <div class = "content">Начните диалог</div>
     </div>
     <div class = "third">
         <div class = "time">17:00:00</div>

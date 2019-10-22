@@ -66,6 +66,10 @@ template.innerHTML = `
         float: left;
         }
         
+        .first {
+        display:None;
+        }
+        
     </style>
     
     <form>
