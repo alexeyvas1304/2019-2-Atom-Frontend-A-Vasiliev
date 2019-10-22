@@ -1,3 +1,4 @@
+/* eslint-disable no-unused-vars */
 /* eslint-disable quotes */
 /* eslint-disable prefer-template */
 /* eslint-disable eqeqeq */
@@ -14,6 +15,17 @@ template.innerHTML = `
         background-color: purple;
         border: 2px solid black;
         height: 10vh;
+        display: flex;
+        }
+        
+        button {
+        color:grey;
+        margin:20px;
+        flex:1;
+        }
+        
+        .info {
+        flex:15;
         }
         
         .partner {
@@ -32,7 +44,7 @@ template.innerHTML = `
         background-color: white;
         border-bottom: 0px solid black;
         display:flex;
-        flex-direction: column;
+        flex-direction: column-reverse;
         align-items: flex-end;
         height:82vh;
         overflow: scroll;
@@ -50,15 +62,24 @@ template.innerHTML = `
             visibility: collapse;
         }
         
+        message-block {
+        float: left;
+        }
+        
     </style>
     
     <form>
     
         <div class = "begin">
-            <h1 class = "partner">АЛЕКСЕЙ ВАСИЛЬЕВ</h1 class = "partner">
-            <div class = "state">в сети</div>
+            <button>Назад</button>
+            <div class="info">
+              <h1 class = "partner">АЛЕКСЕЙ ВАСИЛЬЕВ</h1 class = "partner">
+              <div class = "state">в сети</div>
+            </div>
         </div>
-        <div class = "window"></div>    
+        <div class = "window">
+        <message-block class = "first" content = "Привет. Добро пожаловать в чат" time = "17:00:00"></message-block>
+</div>    
         <div class = "end">
             <form-input name="message-text" placeholder="Введите сообщение"></form-input>
         </div>
@@ -74,26 +95,35 @@ class MessageForm extends HTMLElement {
 
     this.$form = this._shadowRoot.querySelector('form');
     this.$input = this._shadowRoot.querySelector('form-input');
-    this.$mainpart = this._shadowRoot.querySelector('.mainpart');
     this.$window = this._shadowRoot.querySelector('.window');
+    this.$button = this._shadowRoot.querySelector('button');
+    this.$firstMessage = this._shadowRoot.querySelector('message-block');
 
     this.$form.addEventListener('submit', this._onSubmit.bind(this));
     this.$form.addEventListener('keypress', this._onKeyPress.bind(this));
+    this.$button.addEventListener('click', this._onButton.bind(this));
   }
 
   connectedCallback() {
     const messages = localStorage.getItem('history');
     this.messages = messages ? JSON.parse(messages) : [];
-    for (let i = 0; i < this.messages.length; i++) {
+    // eslint-disable-next-line space-infix-ops
+    for (let i = this.messages.length-1; i >= 0; i--) {
       const $message = document.createElement('message-block');
       $message.setAttribute('content', this.messages[i][1]);
       $message.setAttribute('time', this.messages[i][2]);
-      this.$window.appendChild($message);
+      this.$window.insertBefore($message, this.$firstMessage);
     }
   }
 
+  _onButton(event) {
+    this.dispatchEvent(new Event('backButtonFromDialog'));
+    }
+
+
   _onSubmit(event) {
     event.preventDefault();
+    this.$firstMessage = this._shadowRoot.querySelector('message-block');
 
     if (this.$input.value.trim() !== '') {
       let content = this.$input.value;
@@ -120,11 +150,12 @@ class MessageForm extends HTMLElement {
       const $message = document.createElement('message-block');
       $message.setAttribute('content', content);
       $message.setAttribute('time', time);
-      this.$window.appendChild($message);
+      this.$window.insertBefore($message, this.$firstMessage);
+      this.$firstMessage = this._shadowRoot.querySelector('message-block');
 
 
-      this.$window.scrollTo(0, 10 ** 20); // не знаю, как по-другому сделать нормальный скролл
       this.$input.value = '';
+      this.$window.scrollTo(0, 10 ** 20);
     }
   }
 
