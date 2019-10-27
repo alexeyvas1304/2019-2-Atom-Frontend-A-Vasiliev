@@ -1,3 +1,4 @@
+/* eslint-disable no-underscore-dangle */
 const template = document.createElement('template');
 
 template.innerHTML = `
@@ -33,6 +34,11 @@ template.innerHTML = `
             display:flex;
             flex-direction: column;
         }
+        
+        .all:hover {
+        background-color: darkturquoise;
+        }
+        
     </style>
     <div class="all">
         <div class = "content"></div>
@@ -43,14 +49,14 @@ template.innerHTML = `
 class Message extends HTMLElement {
     constructor() {
         super();
-        this.shadowRoot = this.attachShadow({ mode: 'open' });
-        this.shadowRoot.appendChild(template.content.cloneNode(true));
+        this._shadowRoot = this.attachShadow({ mode: 'open' });
+        this._shadowRoot.appendChild(template.content.cloneNode(true));
 
-        this.$all = this.shadowRoot.querySelector('.all');
+        this.$all = this._shadowRoot.querySelector('.all');
 
-        this.$author = this.shadowRoot.querySelector('.author');
-        this.$content = this.shadowRoot.querySelector('.content');
-        this.$time = this.shadowRoot.querySelector('.time');
+        this.$author = this._shadowRoot.querySelector('.author');
+        this.$content = this._shadowRoot.querySelector('.content');
+        this.$time = this._shadowRoot.querySelector('.time');
     }
 
     static get observedAttributes() {
