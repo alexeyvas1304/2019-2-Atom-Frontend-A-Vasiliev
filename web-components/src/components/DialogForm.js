@@ -1,3 +1,4 @@
+/* eslint-disable no-underscore-dangle */
 const template = document.createElement('template');
 template.innerHTML = `
     <style>
@@ -6,8 +7,8 @@ template.innerHTML = `
         .begin {
         background-color: purple;
         border: 2px solid black;
-        height: 10vh;
-        display:flex;
+        height: 8vh;
+        display: flex;
         }
         
         
@@ -15,19 +16,30 @@ template.innerHTML = `
         color: white;
         text-align: center;
         margin-bottom: 10px;
-        flex:19;
+        transition: all 1s ease-in-out;
+        flex:20;
         }
         
-        .burger {
-        flex:1.2;
-        overflow: hidden;
+        .header:hover {
+        color:black;
+        }
         
+        
+        
+        .burger {
+        overflow: hidden;
+        cursor:pointer;
+        width:60px;
+        height:72px;
+        margin-left: 10px;
         }
         
         .search {
-        flex:1.2;
         overflow: hidden;
         margin:5px;
+        cursor:pointer;
+        width:60px;
+        height:60px;
         }
         
        
@@ -52,14 +64,47 @@ template.innerHTML = `
         width: 60px;
         float: right;
         margin-right: 15px;
+        cursor: pointer;
+        border-radius: 50px;
+        transform:rotate(0deg);
+        transition: transform 1s ease;
+        animation: pulse 2s linear infinite;
         }
         
+        
+        
+        .newchat:hover {
+        transform: rotate(180deg);
+        animation: none;
+        }
+        
+        @keyframes pulse {
+        0% {
+          box-shadow: 0 0 0 0 #bbbbbb;
+        }
+        
+        50% {
+            box-shadow: 0 0 0 10px #bbbbbb;
+        }
+        
+        100% {
+            box-shadow: 0 0 0 0 #bbbbbb;
+        }
+        }
 
         
         
         .messages {
         display:None;
         }
+        
+        dialog-block {
+        cursor: pointer;
+        }
+        
+        
+        
+        
         
     </style>
     
@@ -88,16 +133,16 @@ template.innerHTML = `
 class DialogForm extends HTMLElement {
     constructor() {
         super();
-        this.shadowRoot = this.attachShadow({ mode: 'open' });
-        this.shadowRoot.appendChild(template.content.cloneNode(true));
+        this._shadowRoot = this.attachShadow({ mode: 'open' });
+        this._shadowRoot.appendChild(template.content.cloneNode(true));
 
-        this.$form = this.shadowRoot.querySelector('form');
-        this.$window = this.shadowRoot.querySelector('dialog-block');
-        this.$buttonNewChat = this.shadowRoot.querySelector('.newchat');
-        this.$messageForm = this.shadowRoot.querySelector('message-form');
+        this.$form = this._shadowRoot.querySelector('form');
+        this.$window = this._shadowRoot.querySelector('dialog-block');
+        this.$buttonNewChat = this._shadowRoot.querySelector('.newchat');
+        this.$messageForm = this._shadowRoot.querySelector('message-form');
 
-        this.$dialogs = this.shadowRoot.querySelector('.dialogs');
-        this.$messages = this.shadowRoot.querySelector('.messages');
+        this.$dialogs = this._shadowRoot.querySelector('.dialogs');
+        this.$messages = this._shadowRoot.querySelector('.messages');
 
         if (localStorage.getItem('history') !== null) {
             const header = JSON.parse(localStorage.getItem('history'))[JSON.parse(localStorage.getItem('history')).length - 1][0];

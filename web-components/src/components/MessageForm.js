@@ -1,3 +1,4 @@
+/* eslint-disable no-underscore-dangle */
 const template = document.createElement('template');
 template.innerHTML = `
     <style>
@@ -11,25 +12,43 @@ template.innerHTML = `
         }
         
         .buttonback {
-        width: 100px;
-        margin:20px;
+        width:60px;
+        margin:15px;
+        cursor: pointer;
+        border-radius: 50px;
+        overflow: hidden;
         }
+        
+        
         
         .info {
         flex:15;
         }
         
+       
+        
         .partner {
         color: white;
         text-align: center;
         margin-bottom: 10px;
+        transition: color 2s ease;
         }
+        
+        .partner:hover {
+        color:black;
+        }
+        
+        
         
         .state {
         font-size: 14pt;
         text-align: center;
         color: white;
         }
+        
+        
+        
+        
         
         .window {
         background-color: white;
@@ -53,8 +72,16 @@ template.innerHTML = `
             visibility: collapse;
         }
         
+        
+        @keyframes fadeOut {
+         0%  { opacity: 0; }
+         10% { opacity: 0.1; }
+         90% { opacity: 0.9;}
+         100% { opacity: 1; }
+            }
+            
         message-block {
-        float: left;
+        animation: fadeOut 1s;
         }
         
         .first {
@@ -85,14 +112,14 @@ template.innerHTML = `
 class MessageForm extends HTMLElement {
     constructor() {
         super();
-        this.shadowRoot = this.attachShadow({ mode: 'open' });
-        this.shadowRoot.appendChild(template.content.cloneNode(true));
+        this._shadowRoot = this.attachShadow({ mode: 'open' });
+        this._shadowRoot.appendChild(template.content.cloneNode(true));
 
-        this.$form = this.shadowRoot.querySelector('form');
-        this.$input = this.shadowRoot.querySelector('form-input');
-        this.$window = this.shadowRoot.querySelector('.window');
-        this.$button = this.shadowRoot.querySelector('.buttonback');
-        this.$firstMessage = this.shadowRoot.querySelector('message-block');
+        this.$form = this._shadowRoot.querySelector('form');
+        this.$input = this._shadowRoot.querySelector('form-input');
+        this.$window = this._shadowRoot.querySelector('.window');
+        this.$button = this._shadowRoot.querySelector('.buttonback');
+        this.$firstMessage = this._shadowRoot.querySelector('message-block');
 
         this.$form.addEventListener('submit', this.onSubmit.bind(this));
         this.$form.addEventListener('keypress', this.onKeyPress.bind(this));
