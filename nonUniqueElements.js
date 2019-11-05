@@ -25,17 +25,20 @@ nonUniqueElements([10, 9, 10, 10, 9, 8]) == [10, 9, 10, 10, 9]
  */
 
 export default function nonUniqueElements(data) {
-  let list_of_nonunique = [];
-  let result = [];
-  for (let i = 0;i<data.length;i++) {
-    if (!list_of_nonunique.includes(data[i]) && data.slice(i+1).includes(data[i])) {
-      list_of_nonunique.push(data[i]);
-    }
-  }
-  for (let i = 0;i<data.length;i++) {
-    if (list_of_nonunique.includes(data[i])) {
-      result.push(data[i]);
-    }
-  }
-  return result;
+	const listOfNonunique = [];
+	const result = [];
+	for (let i = 0; i < data.length; i++) {
+		if (
+			!listOfNonunique.includes(data[i]) &&
+			data.slice(i + 1).includes(data[i])
+		) {
+			listOfNonunique.push(data[i]);
+		}
+	}
+	for (let i = 0; i < data.length; i++) {
+		if (listOfNonunique.includes(data[i])) {
+			result.push(data[i]);
+		}
+	}
+	return result;
 }
