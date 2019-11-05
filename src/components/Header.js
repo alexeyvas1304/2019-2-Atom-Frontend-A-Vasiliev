@@ -2,8 +2,9 @@ import React from 'react';
 import styled from '@emotion/styled';
 import { keyframes } from '@emotion/core';
 import logo from '../assets/logo.svg';
+import './header.css';
 
-const year = '2k19';
+const year = '2k18';
 
 const rotate360 = keyframes`
 	from {
