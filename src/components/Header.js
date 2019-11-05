@@ -3,7 +3,7 @@ import styled from '@emotion/styled';
 import { keyframes } from '@emotion/core';
 import logo from '../assets/logo.svg';
 
-const year = new Date().getFullYear();
+const year = '2k19';
 
 const rotate360 = keyframes`
 	from {
