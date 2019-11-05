@@ -3,14 +3,14 @@
 
 module.exports = {
 	extends: [
-		/*'@wemake-services/stylelint-config-scss',*/
+		/* '@wemake-services/stylelint-config-scss', */
 		'stylelint-config-css-modules',
-		/*'stylelint-a11y/recommended',*/
-		/*'stylelint-config-airbnb',*/
+		/* 'stylelint-a11y/recommended', */
+		/* 'stylelint-config-airbnb', */
 	],
 	plugins: ['stylelint-no-unsupported-browser-features', 'stylelint-a11y'],
 
-	/*rules: {
+	/* rules: {
 		'a11y/media-prefers-reduced-motion': 0,
 		'plugin/no-low-performance-animation-properties': 0,
 		// ignore special `var-` css variables for `:export`
@@ -30,7 +30,7 @@ module.exports = {
 		],
 		// a11y
 		'a11y/content-property-no-static-value': true,
-	},*/
+	}, */
 	rules: {
 		'selector-max-id': 1,
 		'block-no-empty': true,
