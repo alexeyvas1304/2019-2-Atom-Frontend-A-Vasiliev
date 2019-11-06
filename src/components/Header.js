@@ -4,14 +4,14 @@ import { keyframes } from '@emotion/core';
 import logo from '../assets/logo.svg';
 import './header.css';
 
-const year = '2k18';
+const year = '2020';
 
 const rotate360 = keyframes`
 	from {
 		transform: rotate(0deg);
 	}
 	to {
-		transform: rotate(90deg);
+		transform: rotate(360deg);
 	}
 `;
 
