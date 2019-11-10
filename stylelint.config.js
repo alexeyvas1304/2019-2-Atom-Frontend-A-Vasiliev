@@ -47,7 +47,7 @@ module.exports = {
 		'property-no-vendor-prefix': true,
 		'selector-list-comma-space-before': 'never',
 		'selector-list-comma-newline-after': 'always',
-		'string-quotes': 'double',
+		'string-quotes': 'single',
 		'value-no-vendor-prefix': true,
 	},
 };
