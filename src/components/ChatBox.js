@@ -3,7 +3,7 @@
 /* eslint-disable react/prop-types */
 
 import React from 'react';
-import './ChatBox.css';
+import '../styles/ChatBox.css';
 
 export default function ChatBox(props, key) {
 	const { state, switcher, chat } = props;

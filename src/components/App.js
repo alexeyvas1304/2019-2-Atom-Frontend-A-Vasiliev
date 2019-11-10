@@ -2,8 +2,8 @@
 /* eslint-disable react/no-unused-state */
 
 import React, { Component } from 'react';
-import './App.css';
-import Header from './Head';
+import '../styles/App.css';
+import Header from './Header';
 import ChatList from './ChatList';
 import MessageList from './MessageList';
 import FormInput from './FormInput';

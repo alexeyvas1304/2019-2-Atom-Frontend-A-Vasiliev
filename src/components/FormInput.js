@@ -2,7 +2,7 @@
 /* eslint-disable react/prop-types */
 
 import React, { useState } from 'react';
-import './FormInput.css';
+import '../styles/FormInput.css';
 
 export default function FormInput(props) {
 	const { state, switcher } = props;

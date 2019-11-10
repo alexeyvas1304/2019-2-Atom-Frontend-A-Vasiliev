@@ -4,7 +4,7 @@
 
 import React from 'react';
 import ChatBox from './ChatBox';
-import './ChatList.css';
+import '../styles/ChatList.css';
 
 export default function ChatList(props) {
 	const { state, switcher } = props;

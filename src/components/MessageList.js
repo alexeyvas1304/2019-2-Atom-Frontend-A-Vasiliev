@@ -1,7 +1,7 @@
 /* eslint-disable react/prop-types */
 import React from 'react';
 import MessageBox from './MessageBox';
-import './MessageList.css';
+import '../styles/MessageList.css';
 
 export default function MessageList(props) {
 	const { state, switcher } = props;

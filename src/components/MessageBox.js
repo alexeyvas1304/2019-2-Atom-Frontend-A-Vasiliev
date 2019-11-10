@@ -1,6 +1,6 @@
 /* eslint-disable react/prop-types */
 import React from 'react';
-import './MessageBox.css';
+import '../styles/MessageBox.css';
 
 export default function MessageBox(props, key) {
 	const { message } = props;
