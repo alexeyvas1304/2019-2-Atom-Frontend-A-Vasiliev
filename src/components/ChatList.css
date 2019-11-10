@@ -1,0 +1,38 @@
+.ulChat {
+	padding-left: 0px;
+	margin-top: 0px;
+}
+
+.newChat {
+	width: 60px;
+	margin-right: 15px;
+	margin-bottom: 15px;
+	cursor: pointer;
+	border-radius: 50px;
+	transform: rotate(0deg);
+	transition: transform 1s ease;
+	animation: pulse 2s linear infinite;
+	z-index: 999;
+	position: fixed;
+	right: 0;
+	bottom: 0;
+}
+
+.newChat:hover {
+	transform: rotate(180deg);
+	animation: none;
+}
+
+@keyframes pulse {
+	0% {
+		box-shadow: 0 0 0 0 #bbbbbb;
+	}
+
+	50% {
+		box-shadow: 0 0 0 10px #bbbbbb;
+	}
+
+	100% {
+		box-shadow: 0 0 0 0 #bbbbbb;
+	}
+}
