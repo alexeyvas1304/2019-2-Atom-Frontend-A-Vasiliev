@@ -21,7 +21,9 @@ export default function ChatList(props) {
 					firstMessage = 'Начните диалог';
 				}
 				const currentDate = new Date();
-
+				const hoursDiff =
+					currentDate.getHours() - currentDate.getTimezoneOffset() / 60;
+				currentDate.setHours(hoursDiff);
 				chats.push([chats.length + 1, newTopic, firstMessage, currentDate]);
 				localStorage.setItem('chatInfo', JSON.stringify(chats));
 				localStorage.setItem(

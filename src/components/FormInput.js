@@ -14,6 +14,10 @@ export default function FormInput(props) {
 		if (event.key === 'Enter' && event.target.value.trim() !== '') {
 			setValue('');
 			const date = new Date();
+			const hoursDiff = date.getHours() - date.getTimezoneOffset() / 60;
+			// const minutesDiff = (delete date.getHours() - date.getTimezoneOffset()) % 60;
+			date.setHours(hoursDiff);
+			// date.setMinutes(minutesDiff);
 			const messages = JSON.parse(localStorage.getItem(currentId));
 			messages.push([event.target.value, date]);
 			event.target.value = '';
