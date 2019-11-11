@@ -10,28 +10,10 @@ export default function FormInput(props) {
 
 	const [value, setValue] = useState('');
 
-	function getDate() {
-		const nowDate = new Date();
-		let Hour = nowDate.getHours();
-		if (String(Hour).length === 1) {
-			Hour = `0${Hour}`;
-		}
-		let Minutes = nowDate.getMinutes();
-		if (String(Minutes).length === 1) {
-			Minutes = `0${Minutes}`;
-		}
-		let Seconds = nowDate.getSeconds();
-		if (String(Seconds).length === 1) {
-			Seconds = `0${Seconds}`;
-		}
-		const time = `${Hour}:${Minutes}:${Seconds}`;
-		return time;
-	}
-
 	const addMessage = (event) => {
 		if (event.key === 'Enter' && event.target.value.trim() !== '') {
 			setValue('');
-			const date = getDate();
+			const date = new Date();
 			const messages = JSON.parse(localStorage.getItem(currentId));
 			messages.push([event.target.value, date]);
 			event.target.value = '';

@@ -7,11 +7,11 @@ export default function MessageBox(props, key) {
 	const uniqueKey = key;
 
 	return (
-		<li key={uniqueKey} className="libox">
+		<div key={uniqueKey} className="divbox">
 			<div className="MessageBox">
 				<div className="contentMessageBox">{message[0]}</div>
-				<div className="time">{message[1]}</div>
+				<div className="time">{message[1].slice(11, 19)}</div>
 			</div>
-		</li>
+		</div>
 	);
 }

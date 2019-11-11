@@ -10,32 +10,17 @@ export default function ChatList(props) {
 	const { state, switcher } = props;
 	const { chats } = state;
 
-	function getDate() {
-		const nowDate = new Date();
-		let Hour = nowDate.getHours();
-		if (String(Hour).length === 1) {
-			Hour = `0${Hour}`;
-		}
-		let Minutes = nowDate.getMinutes();
-		if (String(Minutes).length === 1) {
-			Minutes = `0${Minutes}`;
-		}
-		let Seconds = nowDate.getSeconds();
-		if (String(Seconds).length === 1) {
-			Seconds = `0${Seconds}`;
-		}
-		const time = `${Hour}:${Minutes}:${Seconds}`;
-		return time;
-	}
-
 	function createChat() {
 		const newTopic = prompt('Введите название нового чата', 'новый чат');
 		if (newTopic !== null) {
-			if (newTopic.length === 0) {
+			if (newTopic.trim().length === 0) {
 				alert('Введите нормальное название диалога');
 			} else {
-				const firstMessage = prompt('Введите первое сообщение', 'Привет');
-				const currentDate = getDate();
+				let firstMessage = prompt('Введите первое сообщение', 'Привет');
+				if (firstMessage.trim().length === 0) {
+					firstMessage = 'Начните диалог';
+				}
+				const currentDate = new Date();
 
 				chats.push([chats.length + 1, newTopic, firstMessage, currentDate]);
 				localStorage.setItem('chatInfo', JSON.stringify(chats));
@@ -47,18 +32,28 @@ export default function ChatList(props) {
 			}
 		}
 	}
+
+	function compareDates(a, b) {
+		if (a[3] < b[3]) return 1;
+		if (a[3] > b[3]) return -1;
+		return 0;
+	}
+
 	return (
 		<div>
-			<ul className="ulChat">
-				{chats.map((item) => (
-					<ChatBox
-						key={item[0]}
-						state={state}
-						switcher={switcher}
-						chat={item}
-					/>
-				))}
-			</ul>
+			<div className="divChat">
+				{chats
+					.slice()
+					.sort(compareDates)
+					.map((item) => (
+						<ChatBox
+							key={item[0]}
+							state={state}
+							switcher={switcher}
+							chat={item}
+						/>
+					))}
+			</div>
 			<img
 				className="newChat"
 				alt="кнопка нового чата"

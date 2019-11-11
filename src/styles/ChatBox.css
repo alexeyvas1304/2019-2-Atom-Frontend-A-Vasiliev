@@ -6,7 +6,6 @@ li {
 	background-color: white;
 	border-bottom: 3px purple solid;
 	display: flex;
-	height: 10vh;
 }
 
 .chatBox:hover {
@@ -23,6 +22,7 @@ li {
 	display: flex;
 	flex-direction: column;
 	justify-content: space-around;
+	overflow: hidden;
 }
 
 .third {
@@ -34,26 +34,26 @@ li {
 
 .avatar {
 	width: 100px;
+	height: 100px;
 	margin: 4px;
 }
 
 .chatName {
-	flex: 7;
+	flex: 7 1;
 	margin-top: 5px;
-	margin-left: 10px;
+	margin-left: 15px;
 	color: purple;
-	font-size: 24px;
+	font-size: 30px;
 }
 
 .content {
 	display: block;
-	font-size: 15px;
+	font-size: 25px;
 	font-family: Ubuntu;
-	flex: 30;
+	flex: 30 1;
 	text-align: left;
 	margin-top: 5px;
 	margin-left: 15px;
-	word-wrap: break-word;
 	overflow: hidden;
 }
 

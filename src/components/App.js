@@ -32,24 +32,22 @@ class App extends Component {
 	render() {
 		return (
 			<div className="allWindow">
-				<div className="header">
-					<Header state={this.state} switcher={this.switcher} />
-				</div>
-				<div className="mainPart">
-					{this.state.onChatList && (
-						<ChatList state={this.state} switcher={this.switcher} />
-					)}
-					{!this.state.onChatList && (
-						<div className="innerWrapper">
-							<MessageList state={this.state} switcher={this.switcher} />
-						</div>
-					)}
-				</div>
-				<div className="footer">
-					{!this.state.onChatList && (
+				<Header state={this.state} switcher={this.switcher} />
+
+				{this.state.onChatList && (
+					<ChatList state={this.state} switcher={this.switcher} />
+				)}
+				{!this.state.onChatList && (
+					<div className="messageListWrapper">
+						<MessageList state={this.state} switcher={this.switcher} />
+					</div>
+				)}
+
+				{!this.state.onChatList && (
+					<div className="footer">
 						<FormInput state={this.state} switcher={this.switcher} />
-					)}
-				</div>
+					</div>
+				)}
 			</div>
 		);
 	}

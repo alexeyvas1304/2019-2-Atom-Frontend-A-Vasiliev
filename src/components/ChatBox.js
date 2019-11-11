@@ -11,11 +11,15 @@ export default function ChatBox(props, key) {
 	const uniqueKey = key;
 
 	const id = chat[0];
-	const title = chat[1];
-	let lastMessage = chat[2];
-	if (lastMessage.length > 200) {
-		lastMessage = `${lastMessage.slice(0, 200)}...`;
+	let title = chat[1];
+	if (title.length > 30) {
+		title = `${title.slice(0, 30)}...`;
 	}
+	let lastMessage = chat[2];
+	if (lastMessage.length > 30) {
+		lastMessage = `${lastMessage.slice(0, 30)}...`;
+	}
+
 	const time = chat[3];
 
 	function handleClick() {
@@ -23,7 +27,7 @@ export default function ChatBox(props, key) {
 	}
 
 	return (
-		<li key={uniqueKey}>
+		<div key={uniqueKey}>
 			<div className="chatBox" onClick={handleClick}>
 				<div className="first">
 					<img
@@ -37,7 +41,7 @@ export default function ChatBox(props, key) {
 					<div className="content">{lastMessage}</div>
 				</div>
 				<div className="third">
-					<div className="time">{time}</div>
+					<div className="time">{time.slice(11, 19)}</div>
 					<img
 						className="sign"
 						alt="галочка"
@@ -45,6 +49,6 @@ export default function ChatBox(props, key) {
 					/>
 				</div>
 			</div>
-		</li>
+		</div>
 	);
 }

@@ -10,7 +10,7 @@ export default function MessageList(props) {
 	const messages = JSON.parse(localStorage.getItem(currentId));
 
 	return (
-		<ul className="ulMessage">
+		<div className="divMessage">
 			{messages.map((item) => (
 				<MessageBox
 					key={item[0] + item[1]}
@@ -19,6 +19,6 @@ export default function MessageList(props) {
 					message={item}
 				/>
 			))}
-		</ul>
+		</div>
 	);
 }

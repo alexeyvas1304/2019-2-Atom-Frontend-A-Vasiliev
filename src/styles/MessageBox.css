@@ -20,7 +20,7 @@
 	background-color: aqua;
 	border-radius: 15px;
 	width: auto;
-	max-width: 30vw;
+	max-width: 30%;
 	padding: 10px;
 	margin-top: 15px;
 	margin-right: 5px;
@@ -48,7 +48,7 @@
 	background-color: darkturquoise;
 }
 
-.libox {
+.divbox {
 	box-sizing: border-box;
 	padding: 0 10px 10px;
 	width: 100%;
