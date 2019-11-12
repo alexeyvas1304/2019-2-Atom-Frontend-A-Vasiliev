@@ -1,7 +1,7 @@
 {
-  "generator-track-mail": {
-    "promptValues": {
-      "authorName": "alexey vasiliev"
-    }
-  }
+	"generator-track-mail": {
+		"promptValues": {
+			"authorName": "Alexey"
+		}
+	}
 }

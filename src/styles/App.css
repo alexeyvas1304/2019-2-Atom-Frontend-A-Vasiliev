@@ -1,0 +1,27 @@
+.header {
+	z-index: 1;
+}
+
+body {
+	margin: 0;
+}
+
+.footer {
+	z-index: 1;
+}
+
+.allWindow {
+	display: flex;
+	flex-direction: column;
+	height: 100vh;
+}
+
+.messageListWrapper {
+	z-index: 0;
+	flex-grow: 1;
+	overflow: auto;
+	flex-wrap: wrap;
+	flex-direction: column-reverse;
+	align-content: flex-end;
+	display: flex;
+}

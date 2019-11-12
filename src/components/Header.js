@@ -1,38 +1,51 @@
-import React from 'react'
-import logo from '../assets/logo.svg'
-import styled from '@emotion/styled'
-import { keyframes } from '@emotion/core'
+/* eslint-disable prefer-destructuring */
+/* eslint-disable jsx-a11y/no-noninteractive-element-interactions */
+/* eslint-disable jsx-a11y/click-events-have-key-events */
 
-const year = new Date().getFullYear()
+import React from 'react';
+import '../styles/Header.css';
 
-const rotate360 = keyframes`
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
-`
+export default function Header(props) {
+	const { state, switcher } = props;
+	const { onChatList, chats, currentTitle, currentId } = state;
 
-const TopBar = styled.div`
-  background-color: #222;
-  height: 150px;
-  padding: 20px;
-  color: #fff;
+	function backToChats() {
+		chats[currentId - 1][1] = currentTitle;
+		const lastSection = JSON.parse(localStorage.getItem(currentId));
+		chats[currentId - 1][2] = lastSection[lastSection.length - 1][0];
+		chats[currentId - 1][3] = lastSection[lastSection.length - 1][1];
+		switcher(true, chats, 'список чатов', null);
+	}
 
-  .redux-logo {
-    animation: ${rotate360} infinite 20s linear;
-    height: 80px;
-  }
-`
+	const inChatListButton = (
+		<img
+			className="burger"
+			alt="burger icon"
+			src="https://upload.wikimedia.org/wikipedia/commons/thumb/b/b2/Hamburger_icon.svg/1200px-Hamburger_icon.svg.png"
+		/>
+	);
+	const inDialogButton = (
+		<img
+			className="buttonback"
+			alt="button back"
+			src="https://image.flaticon.com/icons/png/512/12/12104.png"
+			onClick={backToChats}
+		/>
+	);
 
-function Header() {
-  return (
-    <TopBar>
-      <img src={logo} className="redux-logo" alt="logo" />
-      <h2>Atom Mail.Ru, {year}</h2>
-    </TopBar>
-  )
+	const leftButton = onChatList ? inChatListButton : inDialogButton;
+
+	const head = (
+		<div className="allHeader">
+			{leftButton}
+			<div className="title">{currentTitle}</div>
+			<img
+				className="search"
+				alt="search icon"
+				src="https://elize.ru/img/icons/zoom.png"
+			/>
+		</div>
+	);
+
+	return head;
 }
-
-export default Header
