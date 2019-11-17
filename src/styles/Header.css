@@ -18,16 +18,15 @@
 	color: black;
 }
 
-.burger {
+.burgerButton {
 	overflow: hidden;
 	cursor: pointer;
 	width: 60px;
-	height: 72px;
-	margin-left: 10px;
-	margin-top: 10px;
+	height: 60px;
+	margin: 10px;
 }
 
-.search {
+.threePointsButton {
 	overflow: hidden;
 	margin: 10px;
 	cursor: pointer;
@@ -35,10 +34,18 @@
 	height: 60px;
 }
 
-.buttonback {
+.backButton {
 	width: 60px;
 	margin: 10px;
 	cursor: pointer;
 	border-radius: 50px;
 	overflow: hidden;
+}
+
+.bildButton {
+	overflow: hidden;
+	margin: 10px;
+	cursor: pointer;
+	width: 60px;
+	height: 60px;
 }

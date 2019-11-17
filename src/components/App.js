@@ -2,17 +2,20 @@
 /* eslint-disable react/no-unused-state */
 
 import React, { Component } from 'react';
+import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
+
 import '../styles/App.css';
 import Header from './Header';
 import ChatList from './ChatList';
 import MessageList from './MessageList';
 import FormInput from './FormInput';
+import UserProfile from './UserProfile';
 
 class App extends Component {
 	constructor(props) {
 		super(props);
 		this.state = {
-			onChatList: true,
+			where: 'chatlist',
 			chats: JSON.parse(localStorage.getItem('chatInfo')) || [],
 			currentTitle: 'Список чатов',
 			currentId: null,
@@ -22,7 +25,7 @@ class App extends Component {
 
 	switcher(newPlace, newChats, newCurrentTitle, newCurrentId) {
 		this.setState({
-			onChatList: newPlace,
+			where: newPlace,
 			chats: newChats,
 			currentTitle: newCurrentTitle,
 			currentId: newCurrentId,
@@ -32,22 +35,25 @@ class App extends Component {
 	render() {
 		return (
 			<div className="allWindow">
-				<Header state={this.state} switcher={this.switcher} />
-
-				{this.state.onChatList && (
-					<ChatList state={this.state} switcher={this.switcher} />
-				)}
-				{!this.state.onChatList && (
-					<div className="messageListWrapper">
-						<MessageList state={this.state} switcher={this.switcher} />
-					</div>
-				)}
-
-				{!this.state.onChatList && (
-					<div className="footer">
-						<FormInput state={this.state} switcher={this.switcher} />
-					</div>
-				)}
+				<Router>
+					<Header state={this.state} switcher={this.switcher} />
+					<Switch>
+						<Route path="/profile">
+							<UserProfile state={this.state} switcher={this.switcher} />
+						</Route>
+						<Route path={`/${this.state.currentId}`}>
+							<div className="messageListWrapper">
+								<MessageList state={this.state} switcher={this.switcher} />
+							</div>
+							<div className="footer">
+								<FormInput state={this.state} switcher={this.switcher} />
+							</div>
+						</Route>
+						<Route path="/">
+							<ChatList state={this.state} switcher={this.switcher} />
+						</Route>
+					</Switch>
+				</Router>
 			</div>
 		);
 	}

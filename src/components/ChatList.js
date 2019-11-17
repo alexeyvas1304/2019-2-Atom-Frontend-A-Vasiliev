@@ -1,7 +1,7 @@
 /* eslint-disable jsx-a11y/click-events-have-key-events */
 /* eslint-disable jsx-a11y/no-noninteractive-element-interactions */
 /* eslint-disable react/prop-types */
-
+import { Link } from 'react-router-dom';
 import React from 'react';
 import ChatBox from './ChatBox';
 import '../styles/ChatList.css';
@@ -17,20 +17,22 @@ export default function ChatList(props) {
 				alert('Введите нормальное название диалога');
 			} else {
 				let firstMessage = prompt('Введите первое сообщение', 'Привет');
-				if (firstMessage.trim().length === 0) {
-					firstMessage = 'Начните диалог';
+				if (firstMessage !== null) {
+					if (firstMessage.trim().length === 0) {
+						firstMessage = 'Начните диалог';
+					}
+					const currentDate = new Date();
+					const hoursDiff =
+						currentDate.getHours() - currentDate.getTimezoneOffset() / 60;
+					currentDate.setHours(hoursDiff);
+					chats.push([chats.length + 1, newTopic, firstMessage, currentDate]);
+					localStorage.setItem('chatInfo', JSON.stringify(chats));
+					localStorage.setItem(
+						chats.length,
+						JSON.stringify([[firstMessage, currentDate]]),
+					);
+					switcher('chat', chats, newTopic, chats.length);
 				}
-				const currentDate = new Date();
-				const hoursDiff =
-					currentDate.getHours() - currentDate.getTimezoneOffset() / 60;
-				currentDate.setHours(hoursDiff);
-				chats.push([chats.length + 1, newTopic, firstMessage, currentDate]);
-				localStorage.setItem('chatInfo', JSON.stringify(chats));
-				localStorage.setItem(
-					chats.length,
-					JSON.stringify([[firstMessage, currentDate]]),
-				);
-				switcher(false, chats, newTopic, chats.length);
 			}
 		}
 	}
@@ -56,12 +58,14 @@ export default function ChatList(props) {
 						/>
 					))}
 			</div>
-			<img
-				className="newChat"
-				alt="кнопка нового чата"
-				src="https://icon-library.net/images/plus-button-icon/plus-button-icon-27.jpg"
-				onClick={createChat}
-			/>
+			<Link to={`/${chats.length + 1}`}>
+				<img
+					className="newChat"
+					alt="кнопка нового чата"
+					src="https://icon-library.net/images/plus-button-icon/plus-button-icon-27.jpg"
+					onClick={createChat}
+				/>
+			</Link>
 		</div>
 	);
 }
