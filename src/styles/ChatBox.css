@@ -55,6 +55,7 @@ li {
 	margin-top: 5px;
 	margin-left: 15px;
 	overflow: hidden;
+	color: black;
 }
 
 .time {
@@ -62,6 +63,7 @@ li {
 	float: right;
 	margin-right: 15px;
 	margin-top: 4px;
+	color: black;
 }
 
 .sign {
@@ -70,4 +72,8 @@ li {
 	width: 35px;
 	height: 35px;
 	margin-right: 15px;
+}
+
+a {
+	text-decoration: none;
 }

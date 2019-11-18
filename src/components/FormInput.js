@@ -15,16 +15,14 @@ export default function FormInput(props) {
 			setValue('');
 			const date = new Date();
 			const hoursDiff = date.getHours() - date.getTimezoneOffset() / 60;
-			// const minutesDiff = (delete date.getHours() - date.getTimezoneOffset()) % 60;
 			date.setHours(hoursDiff);
-			// date.setMinutes(minutesDiff);
 			const messages = JSON.parse(localStorage.getItem(currentId));
 			messages.push([event.target.value, date]);
 			event.target.value = '';
 			localStorage.setItem(currentId, JSON.stringify(messages));
 			chats[currentId - 1][2] = value;
 			chats[currentId - 1][3] = date;
-			switcher(false, chats, currentTitle, currentId);
+			switcher('chat', chats, currentTitle, currentId);
 			localStorage.setItem('chatInfo', JSON.stringify(chats));
 		}
 	};
