@@ -25,11 +25,16 @@ export default function ChatList(props) {
 					const hoursDiff =
 						currentDate.getHours() - currentDate.getTimezoneOffset() / 60;
 					currentDate.setHours(hoursDiff);
-					chats.push([chats.length + 1, newTopic, firstMessage, currentDate]);
+					chats.push([
+						chats.length + 1,
+						newTopic,
+						[firstMessage, 'text'],
+						currentDate,
+					]);
 					localStorage.setItem('chatInfo', JSON.stringify(chats));
 					localStorage.setItem(
 						chats.length,
-						JSON.stringify([[firstMessage, currentDate]]),
+						JSON.stringify([[[firstMessage, 'text'], currentDate]]),
 					);
 					switcher('chat', chats, newTopic, chats.length);
 				}

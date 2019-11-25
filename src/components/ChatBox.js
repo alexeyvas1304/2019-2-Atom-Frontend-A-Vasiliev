@@ -16,7 +16,10 @@ export default function ChatBox(props, key) {
 	if (title.length > 30) {
 		title = `${title.slice(0, 30)}...`;
 	}
-	let lastMessage = chat[2];
+	let lastMessage = chat[2][0];
+	if (lastMessage.startsWith('blob:http://')) {
+		lastMessage = 'изображение';
+	}
 	if (lastMessage.length > 30) {
 		lastMessage = `${lastMessage.slice(0, 30)}...`;
 	}
