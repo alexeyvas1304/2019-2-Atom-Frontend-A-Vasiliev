@@ -20,22 +20,26 @@ input[type='submit'] {
 	width: 55px;
 	height: 55px;
 	margin-top: 3px;
+	cursor: pointer;
 }
 
 .attachButton {
 	width: 60px;
 	height: 55px;
 	margin-top: 2px;
+	cursor: pointer;
 }
 
 .recordButton {
 	width: 55px;
 	height: 55px;
 	margin-top: 3px;
+	cursor: pointer;
 }
 
 .pauseButton {
 	width: 55px;
 	height: 55px;
 	margin-top: 3px;
+	cursor: pointer;
 }
