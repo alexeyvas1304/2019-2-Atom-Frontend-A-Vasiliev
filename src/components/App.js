@@ -19,16 +19,18 @@ class App extends Component {
 			chats: JSON.parse(localStorage.getItem('chatInfo')) || [],
 			currentTitle: 'Список чатов',
 			currentId: null,
+			isRecording: false,
 		};
 		this.switcher = this.switcher.bind(this);
 	}
 
-	switcher(newPlace, newChats, newCurrentTitle, newCurrentId) {
+	switcher(newPlace, newChats, newCurrentTitle, newCurrentId, newIsRecording) {
 		this.setState({
 			where: newPlace,
 			chats: newChats,
 			currentTitle: newCurrentTitle,
 			currentId: newCurrentId,
+			isRecording: newIsRecording,
 		});
 	}
 

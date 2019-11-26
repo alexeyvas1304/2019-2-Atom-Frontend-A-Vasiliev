@@ -36,7 +36,7 @@ export default function ChatList(props) {
 						chats.length,
 						JSON.stringify([[[firstMessage, 'text'], currentDate]]),
 					);
-					switcher('chat', chats, newTopic, chats.length);
+					switcher('chat', chats, newTopic, chats.length, false);
 				}
 			}
 		}

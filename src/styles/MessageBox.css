@@ -17,6 +17,11 @@
 	text-decoration: underline;
 }
 
+.imageInBox {
+	height: auto;
+	width: 100%;
+}
+
 .time {
 	width: auto;
 	padding: 1px;
@@ -30,7 +35,7 @@
 	background-color: aqua;
 	border-radius: 15px;
 	width: auto;
-	max-width: 50%;
+	max-width: 60%;
 	padding: 10px;
 	margin-top: 15px;
 	margin-right: 5px;

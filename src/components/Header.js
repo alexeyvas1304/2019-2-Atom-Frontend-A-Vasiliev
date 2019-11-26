@@ -18,11 +18,11 @@ export default function Header(props) {
 			chats[currentId - 1][2] = lastSection[lastSection.length - 1][0];
 			chats[currentId - 1][3] = lastSection[lastSection.length - 1][1];
 		}
-		switcher('chatlist', chats, 'список чатов', null);
+		switcher('chatlist', chats, 'список чатов', null, false);
 	}
 
 	function toUserProfile() {
-		switcher('profile', chats, 'Редактировать профиль', null);
+		switcher('profile', chats, 'Редактировать профиль', null, false);
 	}
 
 	const burgerButton = (

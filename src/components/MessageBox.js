@@ -1,3 +1,4 @@
+/* eslint-disable jsx-a11y/media-has-caption */
 /* eslint-disable react/prop-types */
 import React from 'react';
 import '../styles/MessageBox.css';
@@ -20,8 +21,18 @@ export default function MessageBox(props, key) {
 				{message[0][1] === 'img' && (
 					<img
 						className="imageInBox"
-						alt="картинка"
+						alt={message[0][1]}
 						src={message[0][0]}
+						onLoad={() => {
+							window.URL.revokeObjectURL(message[0][0]);
+						}}
+					/>
+				)}
+				{message[0][1] === 'audio' && (
+					<audio
+						className="audioInBox"
+						src={message[0][0]}
+						controls
 						onLoad={() => {
 							window.URL.revokeObjectURL(message[0][0]);
 						}}

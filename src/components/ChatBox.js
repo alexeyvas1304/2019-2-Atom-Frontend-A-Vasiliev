@@ -17,8 +17,11 @@ export default function ChatBox(props, key) {
 		title = `${title.slice(0, 30)}...`;
 	}
 	let lastMessage = chat[2][0];
-	if (lastMessage.startsWith('blob:http://')) {
+	if (chat[2][1] === 'img') {
 		lastMessage = 'изображение';
+	}
+	if (chat[2][1] === 'audio') {
+		lastMessage = 'голосовое сообщение';
 	}
 	if (lastMessage.length > 30) {
 		lastMessage = `${lastMessage.slice(0, 30)}...`;
@@ -27,7 +30,7 @@ export default function ChatBox(props, key) {
 	const time = chat[3];
 
 	function handleClick() {
-		switcher('chat', chats, title, id);
+		switcher('chat', chats, title, id, false);
 	}
 
 	return (

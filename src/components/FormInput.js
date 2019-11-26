@@ -9,9 +9,11 @@ import '../styles/FormInput.css';
 
 export default function FormInput(props) {
 	const { state, switcher } = props;
-	const { chats, currentTitle, currentId } = state;
+	const { chats, currentTitle, currentId, isRecording } = state;
 
 	const [value, setValue] = useState('');
+
+	const [chunks, setChunks] = useState([]);
 
 	const addMessage = (event) => {
 		if (event.key === 'Enter' && event.target.value.trim() !== '') {
@@ -25,7 +27,7 @@ export default function FormInput(props) {
 			localStorage.setItem(currentId, JSON.stringify(messages));
 			chats[currentId - 1][2] = [value, 'text'];
 			chats[currentId - 1][3] = date;
-			switcher('chat', chats, currentTitle, currentId);
+			switcher('chat', chats, currentTitle, currentId, false);
 			localStorage.setItem('chatInfo', JSON.stringify(chats));
 		}
 	};
@@ -33,17 +35,13 @@ export default function FormInput(props) {
 	const getCoord = (event) => {
 		const options = {
 			enableHighAccuracy: true,
-			timeout: 5000,
+			timeout: 3000,
 			maximumAge: 0,
 		};
 
 		function success(pos) {
 			const crd = pos.coords;
 
-			// console.log('Ваше текущее метоположение:');
-			// console.log(`Широта: ${crd.latitude}`);
-			// console.log(`Долгота: ${crd.longitude}`);
-			// console.log(`Плюс-минус ${crd.accuracy} метров.`);
 			const res = `https://www.openstreetmap.org/#map=18/${crd.latitude}/${crd.longitude}`;
 			const date = new Date();
 			const hoursDiff = date.getHours() - date.getTimezoneOffset() / 60;
@@ -53,20 +51,30 @@ export default function FormInput(props) {
 			localStorage.setItem(currentId, JSON.stringify(messages));
 			chats[currentId - 1][2] = [res, 'href'];
 			chats[currentId - 1][3] = date;
-			switcher('chat', chats, currentTitle, currentId);
+			switcher('chat', chats, currentTitle, currentId, false);
 			localStorage.setItem('chatInfo', JSON.stringify(chats));
 		}
 
 		function error(err) {
 			console.warn(`ERROR(${err.code}): ${err.message}`);
 		}
-		console.log(
-			navigator.geolocation.getCurrentPosition(success, error, options),
-		);
+		navigator.geolocation.getCurrentPosition(success, error, options);
 	};
 
 	const attachPhoto = (event) => {
 		for (let i = 0; i < event.target.files.length; i += 1) {
+			const data = new FormData();
+			data.append('image', event.target.files[i]);
+			fetch('https://tt-front.now.sh/upload', {
+				method: 'POST',
+				body: data,
+				mode: 'no-cors',
+			})
+				.then(() => {
+					console.log('все ок!');
+				})
+				.catch(console.log);
+
 			const res = window.URL.createObjectURL(event.target.files[i]);
 			const date = new Date();
 			const hoursDiff = date.getHours() - date.getTimezoneOffset() / 60;
@@ -76,7 +84,7 @@ export default function FormInput(props) {
 			localStorage.setItem(currentId, JSON.stringify(messages));
 			chats[currentId - 1][2] = [res, 'img'];
 			chats[currentId - 1][3] = date;
-			switcher('chat', chats, currentTitle, currentId);
+			switcher('chat', chats, currentTitle, currentId, false);
 			localStorage.setItem('chatInfo', JSON.stringify(chats));
 		}
 	};
@@ -85,6 +93,18 @@ export default function FormInput(props) {
 		event.preventDefault();
 		event.stopPropagation();
 		for (let i = 0; i < event.dataTransfer.files.length; i += 1) {
+			const data = new FormData();
+			data.append('image', event.dataTransfer.files[i]);
+			fetch('https://tt-front.now.sh/upload', {
+				method: 'POST',
+				body: data,
+				mode: 'no-cors',
+			})
+				.then(() => {
+					console.log('все ок!');
+				})
+				.catch(console.log);
+
 			const res = window.URL.createObjectURL(event.dataTransfer.files[i]);
 			const date = new Date();
 			const hoursDiff = date.getHours() - date.getTimezoneOffset() / 60;
@@ -94,7 +114,7 @@ export default function FormInput(props) {
 			localStorage.setItem(currentId, JSON.stringify(messages));
 			chats[currentId - 1][2] = [res, 'img'];
 			chats[currentId - 1][3] = date;
-			switcher('chat', chats, currentTitle, currentId);
+			switcher('chat', chats, currentTitle, currentId, false);
 			localStorage.setItem('chatInfo', JSON.stringify(chats));
 		}
 	};
@@ -102,6 +122,52 @@ export default function FormInput(props) {
 	const preventAndStop = (event) => {
 		event.stopPropagation();
 		event.preventDefault();
+	};
+
+	const getRecord = (event) => {
+		const constraints = { audio: true };
+		navigator.mediaDevices.getUserMedia(constraints).then((stream) => {
+			if (!isRecording) {
+				const mediaRecorder = new MediaRecorder(stream);
+				switcher('chat', chats, currentTitle, currentId, mediaRecorder);
+				mediaRecorder.start(1000);
+
+				// eslint-disable-next-line no-shadow
+				mediaRecorder.ondataavailable = (event) => {
+					chunks.push(event.data);
+				};
+			} else {
+				isRecording.stop();
+				const blob = new Blob(chunks, {
+					type: isRecording.mimeType,
+				});
+
+				const data = new FormData();
+				data.append('audio', blob);
+				fetch('https://tt-front.now.sh/upload', {
+					method: 'POST',
+					body: data,
+					mode: 'no-cors',
+				})
+					.then(() => {
+						console.log('все ок!');
+					})
+					.catch(console.log);
+
+				const res = window.URL.createObjectURL(blob);
+				const date = new Date();
+				const hoursDiff = date.getHours() - date.getTimezoneOffset() / 60;
+				date.setHours(hoursDiff);
+				const messages = JSON.parse(localStorage.getItem(currentId));
+				messages.push([[res, 'audio'], date]);
+				localStorage.setItem(currentId, JSON.stringify(messages));
+				chats[currentId - 1][2] = [res, 'audio'];
+				chats[currentId - 1][3] = date;
+				switcher('chat', chats, currentTitle, currentId, false);
+				localStorage.setItem('chatInfo', JSON.stringify(chats));
+				setChunks([]);
+			}
+		});
 	};
 
 	return (
@@ -128,7 +194,7 @@ export default function FormInput(props) {
 				<img
 					className="attachButton"
 					alt="kkk"
-					src="https://icon-icons.com/icons2/935/PNG/72/attach-interface-symbol-of-rotated-paperclip_icon-icons.com_73316.png"
+					src="https://cdn.icon-icons.com/icons2/1514/PNG/512/attachmentpaperclipsymbolofinterface_104983.png"
 				/>
 			</label>
 			<input
@@ -136,8 +202,25 @@ export default function FormInput(props) {
 				style={{ display: 'none' }}
 				onChange={attachPhoto}
 				multiple
+				accept="image/*"
 				id="attach"
 			/>
+			{!isRecording && (
+				<img
+					className="recordButton"
+					alt="запись звука"
+					src="https://cdn2.iconfinder.com/data/icons/social-messaging-productivity-black-2/1/32-512.png"
+					onClick={getRecord}
+				/>
+			)}
+			{isRecording && (
+				<img
+					className="pauseButton"
+					alt="пауза"
+					src="https://img.icons8.com/material-sharp/452/circled-pause.png"
+					onClick={getRecord}
+				/>
+			)}
 		</div>
 	);
 }
