@@ -8,7 +8,7 @@ import { Link } from 'react-router-dom';
 
 export default function ChatBox(props, key) {
 	const { state, switcher, chat } = props;
-	const { chats } = state;
+	const { numOfChats } = state;
 	const uniqueKey = key;
 
 	const id = chat[0];
@@ -16,6 +16,7 @@ export default function ChatBox(props, key) {
 	if (title.length > 30) {
 		title = `${title.slice(0, 30)}...`;
 	}
+	// console.log('djjjj', chat[2]);
 	let lastMessage = chat[2][0];
 	if (chat[2][1] === 'img') {
 		lastMessage = 'изображение';
@@ -30,7 +31,16 @@ export default function ChatBox(props, key) {
 	const time = chat[3];
 
 	function handleClick() {
-		switcher('chat', chats, title, id, false);
+		switcher('chat', numOfChats, title, id, false);
+
+		// fetch('http://127.0.0.1:8000/message/read_message/', {
+		// method: 'GET',
+		// mode: 'cors',
+		// credentials: 'include',
+		// })
+		// .then((resp) => resp.json())
+		// .then((json) => console.log(json))
+		// .catch(console.log);
 	}
 
 	return (

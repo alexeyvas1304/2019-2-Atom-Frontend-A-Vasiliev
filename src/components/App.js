@@ -16,7 +16,7 @@ class App extends Component {
 		super(props);
 		this.state = {
 			where: 'chatlist',
-			chats: JSON.parse(localStorage.getItem('chatInfo')) || [],
+			numOfChats: 0 || localStorage.getItem('numOfChats'),
 			currentTitle: 'Список чатов',
 			currentId: null,
 			isRecording: false,
@@ -24,10 +24,16 @@ class App extends Component {
 		this.switcher = this.switcher.bind(this);
 	}
 
-	switcher(newPlace, newChats, newCurrentTitle, newCurrentId, newIsRecording) {
+	switcher(
+		newPlace,
+		newNumOfChats,
+		newCurrentTitle,
+		newCurrentId,
+		newIsRecording,
+	) {
 		this.setState({
 			where: newPlace,
-			chats: newChats,
+			numOfChats: newNumOfChats,
 			currentTitle: newCurrentTitle,
 			currentId: newCurrentId,
 			isRecording: newIsRecording,
