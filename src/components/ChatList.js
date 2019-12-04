@@ -45,7 +45,7 @@ export default function ChatList(props) {
 	}
 
 	useEffect(() => {
-		const interval = setInterval(() => {
+		setInterval(() => {
 			fetch('http://127.0.0.1:8000/users/chats/', {
 				method: 'GET',
 				mode: 'cors',
