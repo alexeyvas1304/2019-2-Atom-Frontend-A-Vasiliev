@@ -9,20 +9,14 @@ import { Link } from 'react-router-dom';
 
 export default function Header(props) {
 	const { state, switcher } = props;
-	const { where, chats, currentTitle, currentId } = state;
+	const { where, currentTitle, numOfChats } = state;
 
 	function backToChats() {
-		if (currentId) {
-			chats[currentId - 1][1] = currentTitle;
-			const lastSection = JSON.parse(localStorage.getItem(currentId));
-			chats[currentId - 1][2] = lastSection[lastSection.length - 1][0];
-			chats[currentId - 1][3] = lastSection[lastSection.length - 1][1];
-		}
-		switcher('chatlist', chats, 'список чатов', null);
+		switcher('chatlist', numOfChats, 'список чатов', null, false);
 	}
 
 	function toUserProfile() {
-		switcher('profile', chats, 'Редактировать профиль', null);
+		switcher('profile', numOfChats, 'Редактировать профиль', null, false);
 	}
 
 	const burgerButton = (

@@ -1,10 +1,45 @@
 input {
-	font-size: 2.5em;
-	width: calc(100% - 4px);
+	font-size: 3em;
+	width: calc(100% - 165px);
 	height: calc(100% - 6px);
 	border-top: 3px solid purple;
+	border-right: 3px solid purple;
 }
 
 input[type='submit'] {
 	visibility: collapse;
+}
+
+.inputWrapper {
+	display: flex;
+	width: 100%;
+	background-color: purple;
+}
+
+.placeButton {
+	width: 55px;
+	height: 55px;
+	margin-top: 3px;
+	cursor: pointer;
+}
+
+.attachButton {
+	width: 60px;
+	height: 55px;
+	margin-top: 2px;
+	cursor: pointer;
+}
+
+.recordButton {
+	width: 55px;
+	height: 55px;
+	margin-top: 3px;
+	cursor: pointer;
+}
+
+.pauseButton {
+	width: 55px;
+	height: 55px;
+	margin-top: 3px;
+	cursor: pointer;
 }

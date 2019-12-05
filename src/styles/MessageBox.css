@@ -7,6 +7,21 @@
 	word-wrap: break-word;
 }
 
+.hrefInBox {
+	display: inline-block;
+	font-size: 15px;
+	font-family: Ubuntu;
+	flex: 5;
+	text-align: left;
+	word-wrap: break-word;
+	text-decoration: underline;
+}
+
+.imageInBox {
+	height: auto;
+	width: 100%;
+}
+
 .time {
 	width: auto;
 	padding: 1px;
@@ -20,7 +35,7 @@
 	background-color: aqua;
 	border-radius: 15px;
 	width: auto;
-	max-width: 30%;
+	max-width: 60%;
 	padding: 10px;
 	margin-top: 15px;
 	margin-right: 5px;
