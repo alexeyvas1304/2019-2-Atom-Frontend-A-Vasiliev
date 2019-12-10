@@ -45,7 +45,7 @@ export default function ChatList(props) {
 	}
 
 	useEffect(() => {
-		setInterval(() => {
+		const id = setInterval(() => {
 			fetch('http://127.0.0.1:8000/users/chats/', {
 				method: 'GET',
 				mode: 'cors',
@@ -63,6 +63,7 @@ export default function ChatList(props) {
 					setChats(tmp2);
 				});
 		}, 1000);
+		return () => clearInterval(id);
 	}, []);
 
 	function compareDates(a, b) {

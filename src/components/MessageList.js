@@ -9,7 +9,7 @@ export default function MessageList(props) {
 	const [messages, setMessages] = useState([]);
 
 	useEffect(() => {
-		setInterval(() => {
+		const id = setInterval(() => {
 			fetch(`http://127.0.0.1:8000/chats/get_messages/${currentId}/`, {
 				method: 'GET',
 				mode: 'cors',
@@ -25,6 +25,7 @@ export default function MessageList(props) {
 					setMessages(tmp2);
 				});
 		}, 1000);
+		return () => clearInterval(id);
 	}, [currentId]);
 
 	return (
