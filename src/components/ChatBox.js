@@ -16,7 +16,7 @@ export default function ChatBox(props, key) {
 	if (title.length > 30) {
 		title = `${title.slice(0, 30)}...`;
 	}
-	// console.log('djjjj', chat[2]);
+	// console.log('djj', chat[2]);
 	let lastMessage = chat[2][0];
 	if (chat[2][1] === 'img') {
 		lastMessage = 'изображение';
