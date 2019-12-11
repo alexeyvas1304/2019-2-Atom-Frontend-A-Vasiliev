@@ -2,15 +2,24 @@
 /* eslint-disable jsx-a11y/no-noninteractive-element-interactions */
 /* eslint-disable react/prop-types */
 import { Link } from 'react-router-dom';
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import ChatBox from './ChatBox';
 import '../styles/ChatList.css';
 
 export default function ChatList(props) {
 	const { state, switcher } = props;
-	const { chats } = state;
+	const { numOfChats } = state;
+	const [chats, setChats] = useState([]);
+	// const [numOfChat, setNumOfChat] = useState(null);
 
 	function createChat() {
+		switcher(
+			'users',
+			numOfChats,
+			'Выберете пользователя для создания диалога',
+			null,
+			false,
+		);
 		const newTopic = prompt('Введите название нового чата', 'новый чат');
 		if (newTopic !== null) {
 			if (newTopic.trim().length === 0) {
@@ -21,26 +30,48 @@ export default function ChatList(props) {
 					if (firstMessage.trim().length === 0) {
 						firstMessage = 'Начните диалог';
 					}
-					const currentDate = new Date();
-					const hoursDiff =
-						currentDate.getHours() - currentDate.getTimezoneOffset() / 60;
-					currentDate.setHours(hoursDiff);
-					chats.push([
-						chats.length + 1,
-						newTopic,
-						[firstMessage, 'text'],
-						currentDate,
-					]);
-					localStorage.setItem('chatInfo', JSON.stringify(chats));
-					localStorage.setItem(
-						chats.length,
-						JSON.stringify([[[firstMessage, 'text'], currentDate]]),
-					);
-					switcher('chat', chats, newTopic, chats.length, false);
+
+					const data = new FormData();
+					data.append('topic', newTopic);
+					data.append('first_message', firstMessage);
+					data.append('type_of_message', 'text');
+
+					fetch('http://127.0.0.1:8000/chats/create_chat/', {
+						method: 'POST',
+						body: data,
+						mode: 'cors',
+						credentials: 'include',
+					}).then(() => console.log('norm'));
+
+					const t = +numOfChats + 1;
+					localStorage.setItem('numOfChats', t);
+					switcher('chat', t, newTopic, t, false);
 				}
 			}
 		}
 	}
+
+	useEffect(() => {
+		const id = setInterval(() => {
+			fetch('http://127.0.0.1:8000/users/chats/', {
+				method: 'GET',
+				mode: 'cors',
+				credentials: 'include',
+			})
+				.then((resp) => resp.json())
+				.then((json) => {
+					const tmp = json.response;
+					const tmp2 = tmp.map((item) => [
+						item.id,
+						item.topic,
+						[item.content, item.type_of_message],
+						item.added_at,
+					]);
+					setChats(tmp2);
+				});
+		}, 1000);
+		return () => clearInterval(id);
+	}, []);
 
 	function compareDates(a, b) {
 		if (a[3] < b[3]) return 1;

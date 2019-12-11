@@ -4,31 +4,35 @@
 /* eslint-disable no-param-reassign */
 /* eslint-disable react/prop-types */
 
-import React, { useState } from 'react';
+import React, { useRef } from 'react';
 import '../styles/FormInput.css';
 
 export default function FormInput(props) {
 	const { state, switcher } = props;
-	const { chats, currentTitle, currentId, isRecording } = state;
+	const { numOfChats, currentTitle, currentId, isRecording } = state;
+	const chunks = useRef([]);
 
-	const [value, setValue] = useState('');
-
-	const [chunks, setChunks] = useState([]);
+	function fetching(res, typeOfMessage) {
+		const data = new FormData();
+		data.append('chat_id', currentId);
+		data.append('content', res);
+		data.append('type_of_message', typeOfMessage);
+		fetch('http://127.0.0.1:8000/message/send_message/', {
+			method: 'POST',
+			body: data,
+			mode: 'cors',
+			credentials: 'include',
+		})
+			.then(() => {
+				console.log('все ок!');
+			})
+			.catch(console.log);
+	}
 
 	const addMessage = (event) => {
 		if (event.key === 'Enter' && event.target.value.trim() !== '') {
-			setValue('');
-			const date = new Date();
-			const hoursDiff = date.getHours() - date.getTimezoneOffset() / 60;
-			date.setHours(hoursDiff);
-			const messages = JSON.parse(localStorage.getItem(currentId));
-			messages.push([[event.target.value, 'text'], date]);
-			event.target.value = '';
-			localStorage.setItem(currentId, JSON.stringify(messages));
-			chats[currentId - 1][2] = [value, 'text'];
-			chats[currentId - 1][3] = date;
-			switcher('chat', chats, currentTitle, currentId, false);
-			localStorage.setItem('chatInfo', JSON.stringify(chats));
+			fetching(event.target.value, 'text');
+			event.target.value = ''; // это нормально так делать ?
 		}
 	};
 
@@ -41,18 +45,8 @@ export default function FormInput(props) {
 
 		function success(pos) {
 			const crd = pos.coords;
-
 			const res = `https://www.openstreetmap.org/#map=18/${crd.latitude}/${crd.longitude}`;
-			const date = new Date();
-			const hoursDiff = date.getHours() - date.getTimezoneOffset() / 60;
-			date.setHours(hoursDiff);
-			const messages = JSON.parse(localStorage.getItem(currentId));
-			messages.push([[res, 'href'], date]);
-			localStorage.setItem(currentId, JSON.stringify(messages));
-			chats[currentId - 1][2] = [res, 'href'];
-			chats[currentId - 1][3] = date;
-			switcher('chat', chats, currentTitle, currentId, false);
-			localStorage.setItem('chatInfo', JSON.stringify(chats));
+			fetching(res, 'href');
 		}
 
 		function error(err) {
@@ -63,29 +57,8 @@ export default function FormInput(props) {
 
 	const attachPhoto = (event) => {
 		for (let i = 0; i < event.target.files.length; i += 1) {
-			const data = new FormData();
-			data.append('image', event.target.files[i]);
-			fetch('https://tt-front.now.sh/upload', {
-				method: 'POST',
-				body: data,
-				mode: 'no-cors',
-			})
-				.then(() => {
-					console.log('все ок!');
-				})
-				.catch(console.log);
-
 			const res = window.URL.createObjectURL(event.target.files[i]);
-			const date = new Date();
-			const hoursDiff = date.getHours() - date.getTimezoneOffset() / 60;
-			date.setHours(hoursDiff);
-			const messages = JSON.parse(localStorage.getItem(currentId));
-			messages.push([[res, 'img'], date]);
-			localStorage.setItem(currentId, JSON.stringify(messages));
-			chats[currentId - 1][2] = [res, 'img'];
-			chats[currentId - 1][3] = date;
-			switcher('chat', chats, currentTitle, currentId, false);
-			localStorage.setItem('chatInfo', JSON.stringify(chats));
+			fetching(res, 'img');
 		}
 	};
 
@@ -93,29 +66,8 @@ export default function FormInput(props) {
 		event.preventDefault();
 		event.stopPropagation();
 		for (let i = 0; i < event.dataTransfer.files.length; i += 1) {
-			const data = new FormData();
-			data.append('image', event.dataTransfer.files[i]);
-			fetch('https://tt-front.now.sh/upload', {
-				method: 'POST',
-				body: data,
-				mode: 'no-cors',
-			})
-				.then(() => {
-					console.log('все ок!');
-				})
-				.catch(console.log);
-
 			const res = window.URL.createObjectURL(event.dataTransfer.files[i]);
-			const date = new Date();
-			const hoursDiff = date.getHours() - date.getTimezoneOffset() / 60;
-			date.setHours(hoursDiff);
-			const messages = JSON.parse(localStorage.getItem(currentId));
-			messages.push([[res, 'img'], date]);
-			localStorage.setItem(currentId, JSON.stringify(messages));
-			chats[currentId - 1][2] = [res, 'img'];
-			chats[currentId - 1][3] = date;
-			switcher('chat', chats, currentTitle, currentId, false);
-			localStorage.setItem('chatInfo', JSON.stringify(chats));
+			fetching(res, 'img');
 		}
 	};
 
@@ -129,43 +81,23 @@ export default function FormInput(props) {
 		navigator.mediaDevices.getUserMedia(constraints).then((stream) => {
 			if (!isRecording) {
 				const mediaRecorder = new MediaRecorder(stream);
-				switcher('chat', chats, currentTitle, currentId, mediaRecorder);
+				switcher('chat', numOfChats, currentTitle, currentId, mediaRecorder);
 				mediaRecorder.start(1000);
 
 				// eslint-disable-next-line no-shadow
 				mediaRecorder.ondataavailable = (event) => {
-					chunks.push(event.data);
+					chunks.current.push(event.data);
 				};
 			} else {
 				isRecording.stop();
-				const blob = new Blob(chunks, {
+				const blob = new Blob(chunks.current, {
 					type: isRecording.mimeType,
 				});
 
-				const data = new FormData();
-				data.append('audio', blob);
-				fetch('https://tt-front.now.sh/upload', {
-					method: 'POST',
-					body: data,
-					mode: 'no-cors',
-				})
-					.then(() => {
-						console.log('все ок!');
-					})
-					.catch(console.log);
-
 				const res = window.URL.createObjectURL(blob);
-				const date = new Date();
-				const hoursDiff = date.getHours() - date.getTimezoneOffset() / 60;
-				date.setHours(hoursDiff);
-				const messages = JSON.parse(localStorage.getItem(currentId));
-				messages.push([[res, 'audio'], date]);
-				localStorage.setItem(currentId, JSON.stringify(messages));
-				chats[currentId - 1][2] = [res, 'audio'];
-				chats[currentId - 1][3] = date;
-				switcher('chat', chats, currentTitle, currentId, false);
-				localStorage.setItem('chatInfo', JSON.stringify(chats));
-				setChunks([]);
+				fetching(res, 'audio');
+				switcher('chat', numOfChats, currentTitle, currentId, false);
+				chunks.current = [];
 			}
 		});
 	};
@@ -180,7 +112,6 @@ export default function FormInput(props) {
 			<input
 				type="text"
 				placeholder="Введите сообщение"
-				onChange={(event) => setValue(event.target.value)}
 				onKeyPress={addMessage}
 			/>
 			<img
