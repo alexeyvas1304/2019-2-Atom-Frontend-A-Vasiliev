@@ -16,6 +16,7 @@ export default function ChatBox(props, key) {
 	if (title.length > 30) {
 		title = `${title.slice(0, 30)}...`;
 	}
+	// console.log('djjjj', chat[2]);
 	let lastMessage = chat[2][0];
 	if (chat[2][1] === 'img') {
 		lastMessage = 'изображение';
@@ -31,8 +32,6 @@ export default function ChatBox(props, key) {
 
 	function handleClick() {
 		switcher('chat', numOfChats, title, id, false);
-
-		// здесь будет считывание сообщения
 		// fetch('http://127.0.0.1:8000/message/read_message/', {
 		// method: 'GET',
 		// mode: 'cors',
