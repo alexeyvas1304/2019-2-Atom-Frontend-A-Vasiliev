@@ -13,6 +13,13 @@ export default function ChatList(props) {
 	// const [numOfChat, setNumOfChat] = useState(null);
 
 	function createChat() {
+		switcher(
+			'users',
+			numOfChats,
+			'Выберете пользователя для создания диалога',
+			null,
+			false,
+		);
 		const newTopic = prompt('Введите название нового чата', 'новый чат');
 		if (newTopic !== null) {
 			if (newTopic.trim().length === 0) {
