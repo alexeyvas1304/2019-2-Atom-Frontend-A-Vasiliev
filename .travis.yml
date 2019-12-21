@@ -1,11 +1,13 @@
 language: node_js
 node_js:
   - 'stable'
+before_install:
+  - cd exam/weather
+  - npm install
 cache:
   directories:
     - node_modules
 script:
-  - npm run test
   - npm run build
 
 deploy:
@@ -17,3 +19,4 @@ deploy:
     branch:
       - master
       - devel
+      - exam

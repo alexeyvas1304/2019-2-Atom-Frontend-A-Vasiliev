@@ -1,0 +1,75 @@
+.allPage {
+	height: 100vh;
+	display: flex;
+	flex-direction: column;
+}
+
+.backButton {
+	overflow: hidden;
+	margin: 10px;
+	cursor: pointer;
+	width: 60px;
+	height: 60px;
+}
+.secondHeader {
+	border-bottom: 2px solid black;
+	display: flex;
+	width: 100%;
+}
+
+.allForecast {
+	display: flex;
+	flex-direction: column;
+	justify-content: space-around;
+	flex-grow: 1;
+	background-color: cornflowerblue;
+}
+.mainPart {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	font-size: 50px;
+}
+
+.forecastList {
+	display: flex;
+	flex-direction: column;
+	/*flex-grow: 1;*/
+	justify-content: flex-end;
+	border-radius: 20px;
+	background-color: blue;
+}
+
+.forecastToday {
+	display: flex;
+	align-items: center;
+}
+
+.forecastTomorrow {
+	display: flex;
+	align-items: center;
+}
+
+.forecastAfterTomorrow {
+	display: flex;
+	align-items: center;
+}
+
+.leftPart {
+	display: flex;
+	align-items: center;
+}
+
+.rightPart {
+	justify-content: flex-end;
+	flex-grow: 1;
+	display: flex;
+	padding: 10px;
+	color: white;
+	font-size: 20px;
+}
+
+.textWrapper {
+	color: white;
+	font-size: 20px;
+}

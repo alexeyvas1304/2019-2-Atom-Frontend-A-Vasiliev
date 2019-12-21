@@ -1,0 +1,49 @@
+.newButton {
+	width: 60px;
+	margin-right: 15px;
+	margin-bottom: 15px;
+	cursor: pointer;
+	border-radius: 50px;
+	transform: rotate(0deg);
+	transition: transform 1s ease;
+	animation: pulse 2s linear infinite;
+	z-index: 999;
+	position: fixed;
+	right: 0;
+	bottom: 0;
+}
+
+.newButton:hover {
+	transform: rotate(180deg);
+	animation: none;
+}
+
+.firstHeader {
+	border-bottom: 2px solid black;
+	display: flex;
+	width: 100%;
+}
+
+.burgerButton {
+	overflow: hidden;
+	cursor: pointer;
+	width: 60px;
+	height: 60px;
+	margin: 10px;
+}
+
+.threePointsButton {
+	overflow: hidden;
+	margin: 10px;
+	cursor: pointer;
+	width: 60px;
+	height: 60px;
+}
+
+.title {
+	flex-grow: 1;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	font-size: 55px;
+}
