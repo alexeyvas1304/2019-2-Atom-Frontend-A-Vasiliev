@@ -1,5 +1,6 @@
 {
 	"name": "weather",
+	"homepage": "https://alexeyvas1304.github.io/2019-2-Atom-Frontend-A-Vasiliev/",
 	"version": "0.1.0",
 	"private": true,
 	"dependencies": {
