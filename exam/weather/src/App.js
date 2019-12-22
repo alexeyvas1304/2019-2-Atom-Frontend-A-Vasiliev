@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
 import './App.css';
-// 18514e29c1fd6d28343916892ace92a2
 import CityList from './CityList';
 import CityPage from './CityPage';
 
