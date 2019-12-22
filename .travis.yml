@@ -2,7 +2,8 @@ language: node_js
 node_js:
   - 'stable'
 before_install:
-  - cd exam/weather
+  - cd exam
+  - cd weather
   - npm install
 cache:
   directories:
