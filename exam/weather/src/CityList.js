@@ -45,7 +45,7 @@ export default function CityList(props) {
 				if (data.cod !== 200) {
 					alert('Города с таким названием не существует');
 				} else if (cities.includes(data.id)) {
-					alert('Город уже в списке');
+					alert('Город уже есть в списке');
 				} else {
 					cities.push(data.id);
 					// cities.shift();
