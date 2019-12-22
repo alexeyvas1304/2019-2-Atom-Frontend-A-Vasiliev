@@ -13,6 +13,13 @@ export default function ChatList(props) {
 	// const [numOfChat, setNumOfChat] = useState(null);
 
 	function createChat() {
+		switcher(
+			'users',
+			numOfChats,
+			'Выберете пользователя для создания диалога',
+			null,
+			false,
+		);
 		const newTopic = prompt('Введите название нового чата', 'новый чат');
 		if (newTopic !== null) {
 			if (newTopic.trim().length === 0) {
@@ -45,7 +52,7 @@ export default function ChatList(props) {
 	}
 
 	useEffect(() => {
-		setInterval(() => {
+		const id = setInterval(() => {
 			fetch('http://127.0.0.1:8000/users/chats/', {
 				method: 'GET',
 				mode: 'cors',
@@ -63,6 +70,7 @@ export default function ChatList(props) {
 					setChats(tmp2);
 				});
 		}, 1000);
+		return () => clearInterval(id);
 	}, []);
 
 	function compareDates(a, b) {
